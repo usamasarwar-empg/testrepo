@@ -1,0 +1,14 @@
+version: 2.1
+jobs: 
+  run_tests:
+    docker: 
+      - image: buildpack-deps:stable
+    
+    steps:
+    - checkout
+    - run: 
+        name: Hello world
+        command: |
+          echo 'Hello'
+          apt update
+
