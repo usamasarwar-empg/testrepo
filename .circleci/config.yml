@@ -2,7 +2,7 @@ version: 2.1
 jobs: 
   run_tests:
     docker: 
-      - image: buildpack-deps:stable
+      - image: cimg/node:16.6.2
     steps:
     - checkout
     - run: 
@@ -10,6 +10,9 @@ jobs:
         command: |
           echo 'Hello'
           apt update
+          node --version
+
+
 
 workflows: 
   version: 2.1
