@@ -1,9 +1,23 @@
 version: 2.1
-jobs: 
-  run_tests:
-    docker: 
-      - image: circleci/postgres:13.4
+
+executors:
+  with_database:
+    docker:
       - image: cimg/node:12.21.0
+      - image: circleci/postgres:13.4
+        environment:
+          database_test: phantom_test
+          user_test: postgres
+          password_test: test123
+          host_test: localhost
+          port_test: 5432
+          ssl_test: 0
+          jwtSecret_test: pern
+
+
+jobs:
+  run_tests:
+    executor: with_database
     steps:
     - checkout
     - run: 
@@ -17,8 +31,6 @@ jobs:
           cd ~/project/server
           npm install
           npm run test
-
-
 
 
 
