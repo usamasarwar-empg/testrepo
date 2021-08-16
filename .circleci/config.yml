@@ -31,6 +31,7 @@ jobs:
           cd ~/project/client
           npm install
           npm run test
+          whoami
           cd ~/project/server
           npm install
           npm run test
