@@ -4,7 +4,6 @@ executors:
   with_database:
     docker:
       - image: cimg/node:12.21.0
-      - image: circleci/postgres:13.4
         environment:
           database_test: phantom_test
           user_test: postgres
@@ -13,6 +12,9 @@ executors:
           port_test: 5432
           ssl_test: 0
           jwtSecret_test: pern
+      - image: circleci/postgres:13.4
+        environment:
+          - POSTGRES_PASSWORD=postgres
 
 
 jobs:
