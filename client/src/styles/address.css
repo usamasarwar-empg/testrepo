@@ -1,0 +1,18 @@
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+  .address-form {
+      overflow-x: hidden;
+      overflow-y: auto;
+      height: calc(100vh - 344px)
+  }
+
+  .dropdown {
+      border-radius: 0.25rem;
+  }
