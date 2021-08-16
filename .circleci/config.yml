@@ -31,7 +31,9 @@ jobs:
           cd ~/project/client
           npm install
           npm run test
-          whoami
+          sudo -u postgres psql
+          CREATE DATABASE phantom_test;
+          exit
           cd ~/project/server
           npm install
           npm run test
