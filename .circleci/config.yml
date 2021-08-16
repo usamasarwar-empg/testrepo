@@ -10,6 +10,8 @@ jobs:
         command: |
           echo 'Hello'
           node --version
+          cd ~/project/client
+          npm run test
 
 
 
