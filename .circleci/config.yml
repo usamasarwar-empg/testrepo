@@ -12,6 +12,8 @@ executors:
           port_test: 5432
           ssl_test: 0
           jwtSecret_test: pern
+          DATABASE_URL: postgresql://postgres:test123@localhost:5432/phantom_test
+
       - image: circleci/postgres:13.4
         environment:
           - POSTGRES_PASSWORD=postgres
