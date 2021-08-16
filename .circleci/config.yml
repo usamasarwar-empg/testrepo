@@ -11,6 +11,7 @@ jobs:
           echo 'Hello'
           node --version
           cd ~/project/client
+          npm install
           npm run test
 
 
