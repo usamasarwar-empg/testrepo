@@ -29,12 +29,13 @@ executors:
 jobs:
   fe_tests:
     executor: frontend
-    working_directory: ~/project/client
+    # working_directory: ~/project/client
     steps:
       - checkout
       - run: 
           name: Install npm packages
           command: |
+            cd ~/project/client
             pwd
             npm install
             
