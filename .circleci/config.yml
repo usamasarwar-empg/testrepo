@@ -29,13 +29,9 @@ executors:
 jobs:
   fe_tests:
     executor: frontend
+    working_directory: ~/project/client
     steps:
       - checkout
-      - run:
-          name: Change directory
-          command: |
-            cd ~/project/client
-            pwd
       - run: 
           name: Install npm packages
           command: |
