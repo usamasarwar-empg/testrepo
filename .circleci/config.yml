@@ -29,33 +29,32 @@ executors:
 jobs:
   fe_tests:
     executor: frontend
-    working_directory: ~/project/clien
     steps:
       - checkout
       - run: 
           name: Install npm packages
           command: |
-            ls
-            cd ~/project/clien/client
-            pwd
-            npm install
-            
+            cd ~/project/client
+            npm i
       - run:
           name: Run tests
-          command: npm run test
+          command: |
+            cd ~/project/client
+            npm run test
   be_tests:
     executor: backend
     steps:
       - checkout
-      - run:
-          name: Change directory
-          command: cd ~/project/server
       - run: 
           name: Install npm packages
-          command: npm i
+          command: |
+            cd ~/project/server
+            npm i
       - run:
           name: Run tests
-          command: npm run test
+          command: |
+            cd ~/project/server
+            npm run test
 
           # sudo -u postgres psql
           # CREATE DATABASE phantom_test;
