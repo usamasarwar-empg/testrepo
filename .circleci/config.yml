@@ -33,10 +33,15 @@ jobs:
       - checkout
       - run:
           name: Change directory
-          command: cd ~/project/client
+          command: |
+            cd ~/project/client
+            pwd
       - run: 
           name: Install npm packages
-          command: npm i
+          command: |
+            pwd
+            npm install
+            
       - run:
           name: Run tests
           command: npm run test
