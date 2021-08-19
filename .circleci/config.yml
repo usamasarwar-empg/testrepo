@@ -29,7 +29,7 @@ executors:
 jobs:
   fe_tests:
     executor: frontend
-    # working_directory: ~/project/client
+     working_directory: ~/project/clien
     steps:
       - checkout
       - run: 
