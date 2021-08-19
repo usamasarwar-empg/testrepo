@@ -35,7 +35,8 @@ jobs:
       - run: 
           name: Install npm packages
           command: |
-            cd ~/project/client
+            ls
+            cd ~/project/clien/client
             pwd
             npm install
             
