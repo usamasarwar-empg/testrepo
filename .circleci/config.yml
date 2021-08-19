@@ -1,7 +1,13 @@
 version: 2.1
 
 executors:
-  with_database:
+  frontend:
+    docker:
+      - image: cimg/node:12.21.0
+        environment:
+          REACT_APP_URL: http://127.0.0.1
+          REACT_APP_PORT: 5000
+  backend:
     docker:
       - image: cimg/node:12.21.0
         environment:
@@ -12,7 +18,6 @@ executors:
           port_test: 5432
           ssl_test: 0
           jwtSecret_test: pern
-
       - image: circleci/postgres:13.4
         auth:
           username: postgres
@@ -22,25 +27,39 @@ executors:
 
 
 jobs:
-  run_tests:
-    executor: with_database
+  fe_tests:
+    executor: frontend
     steps:
-    - checkout
-    - run: 
-        name: Hello world
-        command: |
-          echo 'Hello'
-          node --version
-          cd ~/project/client
-          npm install
-          npm run test
-          sudo -u postgres psql
-          CREATE DATABASE phantom_test;
-          exit
-          cd ~/project/server
-          npm install
-          npm run test
+      - checkout
+      - run:
+          name: Change directory
+          command: cd ~/project/client
+      - run: 
+          name: Install npm packages
+          command: npm i
+      - run:
+          name: Run tests
+          command: npm run test
+  be_tests:
+    executor: backend
+    steps:
+      - checkout
+      - run:
+          name: Change directory
+          command: cd ~/project/server
+      - run: 
+          name: Install npm packages
+          command: npm i
+      - run:
+          name: Run tests
+          command: npm run test
 
+          # sudo -u postgres psql
+          # CREATE DATABASE phantom_test;
+          # exit
+          # cd ~/project/server
+          # npm install
+          # npm run test
 
 
 workflows: 
@@ -48,4 +67,5 @@ workflows:
 
   build: 
     jobs: 
-      - run_tests
+      - fe_tests
+      - be_tests
