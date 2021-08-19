@@ -20,8 +20,8 @@ executors:
           jwtSecret_test: pern
       - image: circleci/postgres:13.4
         auth:
-          username: postgres
-          password: test123
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD
         environment:
           - POSTGRES_PASSWORD=postgres
 
