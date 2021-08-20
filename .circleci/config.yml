@@ -17,7 +17,7 @@ executors:
           host_test: localhost
           port: 5432
           ssl: 0
-          jwtSecret: pern
+          jwtSecret_test: pern
       - image: circleci/postgres:13.4
         auth:
           username: mydockerhub-user
