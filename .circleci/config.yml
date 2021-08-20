@@ -13,11 +13,11 @@ executors:
         environment:
           database_test: phantom_test
           user_test: postgres
-          password_test: test123
+          password_test: password
           host_test: localhost
-          port_test: 5432
-          ssl_test: 0
-          jwtSecret_test: pern
+          port: 5432
+          ssl: 0
+          jwtSecret: pern
       - image: circleci/postgres:13.4
         auth:
           username: mydockerhub-user
@@ -54,21 +54,11 @@ jobs:
       - run:
           name: Run tests
           command: |
-            ps aux
             cd ~/project/server
             npm run test
 
-          # sudo -u postgres psql
-          # CREATE DATABASE phantom_test;
-          # exit
-          # cd ~/project/server
-          # npm install
-          # npm run test
-
-
 workflows: 
   version: 2.1
-
   build: 
     jobs: 
       - fe_tests
