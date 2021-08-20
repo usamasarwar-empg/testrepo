@@ -23,8 +23,8 @@ executors:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD
         environment:
-          - POSTGRES_PASSWORD=postgres
-
+          POSTGRES_USER: root
+          POSTGRES_DB: phantom_test
 
 jobs:
   fe_tests:
