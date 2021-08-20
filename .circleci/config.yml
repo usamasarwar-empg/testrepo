@@ -53,6 +53,7 @@ jobs:
       - run:
           name: Run tests
           command: |
+            ps aux
             cd ~/project/server
             npm run test
 
