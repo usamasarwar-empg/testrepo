@@ -45,7 +45,7 @@ jobs:
       - run:
           name: Run linter
           command: |
-            cd ~project/client
+            cd ~/project/client
             npm run lint
   backend_tests:
     executor: backend
@@ -64,7 +64,7 @@ jobs:
       - run:
           name: Run linter
           command: |
-            cd ~project/server
+            cd ~/project/server
             npm run lint
 
 workflows: 
