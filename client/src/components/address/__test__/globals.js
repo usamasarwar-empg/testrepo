@@ -22,4 +22,4 @@ const allAddressesTest = [{
   zipcode: '222',
 }];
 
-export { allAddressesTest };
+export default allAddressesTest;

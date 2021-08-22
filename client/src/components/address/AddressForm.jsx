@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { useState, useEffect } from 'react';
 import { Typeahead } from 'react-bootstrap-typeahead';
 
@@ -58,6 +59,7 @@ function AddressForm({
 
   const [countryValue, setCountryValue] = useState({});
   const [stateValue, setStateValue] = useState({});
+  // eslint-disable-next-line no-unused-vars
   const [cityValue, setCityValue] = useState({});
 
   // Options for typeahead/ dropdowns
@@ -206,6 +208,7 @@ function AddressForm({
 
   return (
     <div className="jumbotron">
+      { /* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
       <form
         role="form"
         onSubmit={allAddresses.length === 0 ? onSubmitNewForm : onSubmitUpdatedForm}
@@ -300,12 +303,12 @@ function AddressForm({
               labelKey="name"
               placeholder="Choose your country..."
               emptyLabel="No Countries found"
-                            // defaultInputValue={
-                            //     countryOptions.length === 0 ? '' : (
-                            //         countryOptions.filter((country) => {
-                            //             return country.id === country_id;
-                            //         })
-                            //         [0].name)}
+              // defaultInputValue={
+              //     countryOptions.length === 0 ? '' : (
+              //         countryOptions.filter((country) => {
+              //             return country.id === country_id;
+              //         })
+              //         [0].name)}
               onChange={(selected) => {
                 // console.log(selected[0].isoCode);
                 if (selected[0]) {
@@ -331,7 +334,7 @@ function AddressForm({
               labelKey="name"
               placeholder="Choose your State..."
               emptyLabel="No States found"
-                            // defaultInputValue={state_name}
+              // defaultInputValue={state_name}
               onChange={(selected) => {
                 if (selected[0]) {
                   setCscValue(cscValue === 2 ? -2 : 2);
@@ -355,7 +358,7 @@ function AddressForm({
               labelKey="name"
               placeholder="Choose your City..."
               emptyLabel="No Cities found"
-                            // defaultInputValue={city_name}
+              // defaultInputValue={city_name}
               onChange={(selected) => {
                 if (selected[0]) {
                   setCscValue(cscValue === 3 ? -3 : 3);
@@ -460,9 +463,9 @@ function AddressForm({
 
         <div className="d-flex justify-content-end pt-4">
           {allAddresses.length === 0
-                        && <button type="submit" className="btn btn-primary">Add Address</button>}
+            && <button type="submit" className="btn btn-primary">Add Address</button>}
           {allAddresses.length === 1
-                        && <button type="submit" className="btn btn-primary">Update Address</button>}
+            && <button type="submit" className="btn btn-primary">Update Address</button>}
 
         </div>
       </form>

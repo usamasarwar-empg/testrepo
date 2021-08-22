@@ -68,7 +68,6 @@ function App() {
     <>
       <Router>
         <Navbar setAuth={setAuth} />
-
         <div className="container" style={{ marginTop: '80px' }}>
           <Switch>
             <Route
@@ -80,7 +79,6 @@ function App() {
                 <Redirect to="/dashboard" />
               ))}
             />
-
             <Route
               exact
               path="/login"
@@ -99,7 +97,6 @@ function App() {
                 <Redirect to="/dashboard" />
               ))}
             />
-
             <Route
               exact
               path="/address"
@@ -119,7 +116,12 @@ function App() {
               render={(props) => {
                 console.log(isAuthenticated);
                 return (isAuthenticated ? (
-                  <Dashboard {...props} setAuth={setAuth} firstname={firstname} lastname={lastname} />
+                  <Dashboard
+                    {...props}
+                    setAuth={setAuth}
+                    firstname={firstname}
+                    lastname={lastname}
+                  />
                 ) : (
                   <Redirect to="/login" />
                 ));

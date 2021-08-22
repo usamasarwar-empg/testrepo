@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const _getCountries = async () => {
   try {
     const res = await fetch(`${process.env.REACT_APP_URL}:${process.env.REACT_APP_PORT}/csc/countries`, {
@@ -16,9 +17,9 @@ const _getCountries = async () => {
   }
 };
 
-const _getStates = async (country_id) => {
+const _getStates = async (countryId) => {
   try {
-    const res = await fetch(`${process.env.REACT_APP_URL}:${process.env.REACT_APP_PORT}/csc/states/${country_id}`, {
+    const res = await fetch(`${process.env.REACT_APP_URL}:${process.env.REACT_APP_PORT}/csc/states/${countryId}`, {
       method: 'GET',
       headers: { jwt_token: localStorage.token },
     });
@@ -33,9 +34,9 @@ const _getStates = async (country_id) => {
   }
 };
 
-const _getCities = async (country_id, state_id) => {
+const _getCities = async (countryId, stateId) => {
   try {
-    const res = await fetch(`${process.env.REACT_APP_URL}:${process.env.REACT_APP_PORT}/csc/cities/${country_id}/${state_id}`, {
+    const res = await fetch(`${process.env.REACT_APP_URL}:${process.env.REACT_APP_PORT}/csc/cities/${countryId}/${stateId}`, {
       method: 'GET',
       headers: { jwt_token: localStorage.token },
     });

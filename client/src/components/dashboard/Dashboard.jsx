@@ -2,7 +2,7 @@ import React from 'react';
 import SearchBar from './SearchBar';
 import Footer from './Footer';
 
-const Dashboard = ({ setAuth, firstname, lastname }) => (
+const Dashboard = ({ firstname, lastname }) => (
   <div>
     <div className="d-flex mt-5 justify-content-around">
       <h2>

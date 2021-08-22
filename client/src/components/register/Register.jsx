@@ -40,8 +40,6 @@ const Register = ({ setAuth }) => {
         toast.success('Registered Successfully');
       } else if (parseRes.message) {
         setAuth(false);
-        // console.log(parseRes);
-        // console.log(parseRes.message);
         toast.error(`Error: ${parseRes.message}`);
       } else {
         setAuth(false);

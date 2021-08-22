@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-  render, fireEvent, waitFor, act, findByPlaceholderText
+  render, fireEvent, waitFor
 } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { MemoryRouter } from 'react-router-dom';
 import 'mutationobserver-shim';
-import { allAddressesTest } from './globals';
+import allAddressesTest from './globals';
 import AddressForm from '../AddressForm';
 import { _updateAddress, _addAddress } from '../../../adapters/address';
 import { _getCountries, _getStates, _getCities } from '../../../adapters/csc';
@@ -22,11 +22,11 @@ describe('Address Form Component tests', () => {
 
   describe('When adding address', () => {
     test('should show all fields in the form', async () => {
-      const { getByRole, getByLabelText, getByPlaceholderText } = render(<MemoryRouter>
-        {' '}
-        <AddressForm allAddresses={[]} />
-        {' '}
-      </MemoryRouter>);
+      const { getByRole, getByLabelText, getByPlaceholderText } = render(
+        <MemoryRouter>
+          <AddressForm allAddresses={[]} />
+        </MemoryRouter>
+      );
 
       await waitFor(async () => {
         expect(getByRole('form')).toBeInTheDocument();
@@ -53,11 +53,11 @@ describe('Address Form Component tests', () => {
     });
 
     test('should show add address button in the form', async () => {
-      const { getByRole } = render(<MemoryRouter>
-        {' '}
-        <AddressForm allAddresses={[]} />
-        {' '}
-                                   </MemoryRouter>);
+      const { getByRole } = render(
+        <MemoryRouter>
+          <AddressForm allAddresses={[]} />
+        </MemoryRouter>
+      );
 
       await waitFor(async () => {
         expect(getByRole('button', { name: /add address/i })).toBeInTheDocument();
@@ -67,8 +67,6 @@ describe('Address Form Component tests', () => {
     test('should change field values on inserting', async () => {
       const {
         getByLabelText,
-        getByPlaceholderText,
-        findByPlaceholderText,
         findByLabelText
       } = render(
         <MemoryRouter>
@@ -181,11 +179,11 @@ describe('Address Form Component tests', () => {
 
   describe('when updating address', () => {
     test('should show all fields with values in the form while updating', async () => {
-      const { getByRole, getByLabelText } = render(<MemoryRouter>
-        {' '}
-        <AddressForm allAddresses={allAddressesTest} />
-        {' '}
-      </MemoryRouter>);
+      const { getByRole, getByLabelText } = render(
+        <MemoryRouter>
+          <AddressForm allAddresses={allAddressesTest} />
+        </MemoryRouter>
+      );
 
       await waitFor(async () => {
         expect(getByRole('form')).toBeInTheDocument();
@@ -204,11 +202,11 @@ describe('Address Form Component tests', () => {
     });
 
     test('should show update address button in the form', async () => {
-      const { getByRole } = render(<MemoryRouter>
-        {' '}
-        <AddressForm allAddresses={allAddressesTest} />
-        {' '}
-                                   </MemoryRouter>);
+      const { getByRole } = render(
+        <MemoryRouter>
+          <AddressForm allAddresses={allAddressesTest} />
+        </MemoryRouter>
+      );
 
       await waitFor(async () => {
         expect(getByRole('button', { name: /update address/i })).toBeInTheDocument();

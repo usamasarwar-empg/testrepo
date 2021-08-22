@@ -65,11 +65,11 @@ describe('Login Component tests', () => {
   });
 
   test('Login should be successful if token recieved', async () => {
-    const { getByRole } = render(<MemoryRouter>
-      {' '}
-      <Login setAuth={setAuth} />
-      {' '}
-                                 </MemoryRouter>);
+    const { getByRole } = render(
+      <MemoryRouter>
+        <Login setAuth={setAuth} />
+      </MemoryRouter>
+    );
     const btnElem = getByRole('button', { name: /submit/i });
     fireEvent.click(btnElem);
 
@@ -84,11 +84,11 @@ describe('Login Component tests', () => {
         (req, res, ctx) => res(ctx.json({ jwtToken: null })))
     );
 
-    const { getByRole } = render(<MemoryRouter>
-      {' '}
-      <Login setAuth={setAuth} />
-      {' '}
-                                 </MemoryRouter>);
+    const { getByRole } = render(
+      <MemoryRouter>
+        <Login setAuth={setAuth} />
+      </MemoryRouter>
+    );
     const btnElem = getByRole('button', { name: /submit/i });
 
     fireEvent.click(btnElem);

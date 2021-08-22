@@ -11,7 +11,8 @@ import { _getAddress, _deleteAddress } from '../../adapters/address';
 import '../../styles/address.css';
 
 function Address({ firstname, lastname }) {
-  const [viewFlag, setviewFlag] = useState(0); // 0 --> show address , 1 --> add address,update address
+  // viewFlag:: 0 --> show address , 1 --> add address,update address
+  const [viewFlag, setviewFlag] = useState(0);
   const [allAddresses, setAllAddresses] = useState([]);
   const [addressChange, setAddressChange] = useState(false);
 
@@ -35,14 +36,14 @@ function Address({ firstname, lastname }) {
   return (
     <div>
       <div className="mt-3 justify-content-around text-center">
-        <button className="btn btn-primary mr-5" onClick={(e) => { setviewFlag(0); }}>
+        <button type="button" className="btn btn-primary mr-5" onClick={() => { setviewFlag(0); }}>
           Show Address
           {' '}
           <i className="fas fa-eye" />
         </button>
         {(allAddresses.length === 0)
                     && (
-                    <button className="btn btn-primary" onClick={(e) => { setviewFlag(1); }}>
+                    <button type="button" className="btn btn-primary" onClick={() => { setviewFlag(1); }}>
                       Add Address
                       {' '}
                       <i className="fas fa-plus" />
@@ -51,7 +52,7 @@ function Address({ firstname, lastname }) {
 
         {(allAddresses.length > 0)
                     && (
-                    <button className="btn btn-primary" onClick={(e) => { setviewFlag(1); }}>
+                    <button type="button" className="btn btn-primary" onClick={() => { setviewFlag(1); }}>
                       Update Address
                       {' '}
                       <i className="far fa-edit" />
@@ -59,7 +60,7 @@ function Address({ firstname, lastname }) {
                     )}
         {(allAddresses.length > 0)
                     && (
-                    <button className="btn btn-danger ml-5" onClick={(e) => { deleteAddress(); }}>
+                    <button type="button" className="btn btn-danger ml-5" onClick={() => { deleteAddress(); }}>
                       Delete Address
                       {' '}
                       <i className="far fa-trash-alt" />
@@ -88,9 +89,7 @@ function Address({ firstname, lastname }) {
                       allAddresses={allAddresses}
                     />
                     )}
-
       </div>
-
     </div>
   );
 }

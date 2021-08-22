@@ -4,7 +4,7 @@ import { setupServer } from 'msw/node';
 import 'mutationobserver-shim';
 import 'whatwg-fetch';
 import {
-  render, fireEvent, waitFor, screen
+  render, fireEvent, waitFor
 } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { MemoryRouter } from 'react-router-dom';
@@ -89,11 +89,11 @@ describe('Register Component tests', () => {
   });
 
   test('Register should be successful if token recieved', async () => {
-    const { getByRole } = render(<MemoryRouter>
-      {' '}
-      <Register setAuth={setAuth} />
-      {' '}
-                                 </MemoryRouter>);
+    const { getByRole } = render(
+      <MemoryRouter>
+        <Register setAuth={setAuth} />
+      </MemoryRouter>
+    );
     const btnElem = getByRole('button', { name: /submit/i });
     fireEvent.click(btnElem);
 
@@ -108,11 +108,11 @@ describe('Register Component tests', () => {
         (req, res, ctx) => res(ctx.json({ jwtToken: null })))
     );
 
-    const { getByRole } = render(<MemoryRouter>
-      {' '}
-      <Register setAuth={setAuth} />
-      {' '}
-                                 </MemoryRouter>);
+    const { getByRole } = render(
+      <MemoryRouter>
+        <Register setAuth={setAuth} />
+      </MemoryRouter>
+    );
     const btnElem = getByRole('button', { name: /submit/i });
 
     fireEvent.click(btnElem);

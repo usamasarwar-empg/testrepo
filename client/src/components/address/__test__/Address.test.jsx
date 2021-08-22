@@ -5,9 +5,9 @@ import {
 import '@testing-library/jest-dom/extend-expect';
 import { MemoryRouter } from 'react-router-dom';
 import 'mutationobserver-shim';
-import { allAddressesTest } from './globals';
+import allAddressesTest from './globals';
 import Address from '../Address';
-import { _getAddress, _deleteAddress, _updateAddress } from '../../../adapters/address';
+import { _getAddress, _deleteAddress } from '../../../adapters/address';
 import { _getCountries, _getStates, _getCities } from '../../../adapters/csc';
 
 jest.mock('../../../adapters/address');
@@ -18,11 +18,11 @@ describe('Address Component tests', () => {
   describe('If user has address', () => {
     test('should show Address table if user\'s address recieved', async () => {
       _getAddress.mockResolvedValue(allAddressesTest);
-      const addrComp = render(<MemoryRouter>
-        {' '}
-        <Address />
-        {' '}
-                              </MemoryRouter>);
+      const addrComp = render(
+        <MemoryRouter>
+          <Address />
+        </MemoryRouter>
+      );
 
       await waitFor(() => {
         expect(addrComp.getByRole('table')).toBeInTheDocument();
@@ -31,10 +31,11 @@ describe('Address Component tests', () => {
 
     test('should show \'Update Show and Delete\'  buttons if address recieved', async () => {
       _getAddress.mockResolvedValue(allAddressesTest);
-      const addrComp = render(<MemoryRouter>
-        <Address />
-        {' '}
-                              </MemoryRouter>);
+      const addrComp = render(
+        <MemoryRouter>
+          <Address />
+        </MemoryRouter>
+      );
 
       await waitFor(() => {
         expect(addrComp.getByRole('button', { name: /update address/i })).toBeInTheDocument();
@@ -46,11 +47,11 @@ describe('Address Component tests', () => {
     describe('Delete address clicked', () => {
       test('should delete address table if delete button clicked', async () => {
         _getAddress.mockResolvedValue(allAddressesTest);
-        const addrComp = render(<MemoryRouter>
-          {' '}
-          <Address />
-          {' '}
-                                </MemoryRouter>);
+        const addrComp = render(
+          <MemoryRouter>
+            <Address />
+          </MemoryRouter>
+        );
 
         await waitFor(async () => {
           const delBtn = addrComp.getByRole('button', { name: /delete address/i });
@@ -71,10 +72,11 @@ describe('Address Component tests', () => {
 
       test('should call delete address api if delete button clicked', async () => {
         _getAddress.mockResolvedValue(allAddressesTest);
-        const addrComp = render(<MemoryRouter>
-          <Address />
-          {' '}
-                                </MemoryRouter>);
+        const addrComp = render(
+          <MemoryRouter>
+            <Address />
+          </MemoryRouter>
+        );
         const delBtn = await addrComp.findByRole('button', { name: /delete address/i });
 
         act(() => {
@@ -93,11 +95,11 @@ describe('Address Component tests', () => {
         _getCountries.mockResolvedValue([]);
         _getStates.mockResolvedValue([]);
         _getCities.mockResolvedValue([]);
-        const addrComp = render(<MemoryRouter>
-          {' '}
-          <Address />
-          {' '}
-                                </MemoryRouter>);
+        const addrComp = render(
+          <MemoryRouter>
+            <Address />
+          </MemoryRouter>
+        );
         const updateBtn = await addrComp.findByRole('button', { name: /update address/i });
 
         act(() => {
@@ -114,11 +116,11 @@ describe('Address Component tests', () => {
         _getCountries.mockResolvedValue([]);
         _getStates.mockResolvedValue([]);
         _getCities.mockResolvedValue([]);
-        const addrComp = render(<MemoryRouter>
-          {' '}
-          <Address />
-          {' '}
-                                </MemoryRouter>);
+        const addrComp = render(
+          <MemoryRouter>
+            <Address />
+          </MemoryRouter>
+        );
         const updateBtn = await addrComp.findByRole('button', { name: /update address/i });
 
         act(() => {
@@ -147,11 +149,11 @@ describe('Address Component tests', () => {
   describe('If user doesn\'t have address ', () => {
     test('should show \'No address added\' msg if address not recieved', async () => {
       _getAddress.mockResolvedValue([]);
-      const addrComp = render(<MemoryRouter>
-        {' '}
-        <Address />
-        {' '}
-                              </MemoryRouter>);
+      const addrComp = render(
+        <MemoryRouter>
+          <Address />
+        </MemoryRouter>
+      );
 
       await waitFor(() => {
         expect(addrComp.getByText(/no address added/i)).toBeInTheDocument();
@@ -160,10 +162,11 @@ describe('Address Component tests', () => {
 
     test('should show \'Add and Show Address\'  buttons if address not recieved', async () => {
       _getAddress.mockResolvedValue([]);
-      const addrComp = render(<MemoryRouter>
-        <Address />
-        {' '}
-                              </MemoryRouter>);
+      const addrComp = render(
+        <MemoryRouter>
+          <Address />
+        </MemoryRouter>
+      );
 
       await waitFor(() => {
         expect(addrComp.getByRole('button', { name: /add address/i })).toBeInTheDocument();
@@ -173,10 +176,11 @@ describe('Address Component tests', () => {
 
     test('should not show \'Update or Delete Address\' buttons if address not recieved', async () => {
       _getAddress.mockResolvedValue([]);
-      const addrComp = render(<MemoryRouter>
-        <Address />
-        {' '}
-                              </MemoryRouter>);
+      const addrComp = render(
+        <MemoryRouter>
+          <Address />
+        </MemoryRouter>
+      );
 
       await waitFor(() => {
         expect(addrComp.queryByRole('button', { name: /update address/i })).not.toBeInTheDocument();
@@ -190,11 +194,11 @@ describe('Address Component tests', () => {
         _getCountries.mockResolvedValue([]);
         _getStates.mockResolvedValue([]);
         _getCities.mockResolvedValue([]);
-        const addrComp = render(<MemoryRouter>
-          {' '}
-          <Address />
-          {' '}
-                                </MemoryRouter>);
+        const addrComp = render(
+          <MemoryRouter>
+            <Address />
+          </MemoryRouter>
+        );
         const addBtn = await addrComp.findByRole('button', { name: /add address/i });
 
         act(() => {
@@ -211,11 +215,11 @@ describe('Address Component tests', () => {
         _getCountries.mockResolvedValue([]);
         _getStates.mockResolvedValue([]);
         _getCities.mockResolvedValue([]);
-        const addrComp = render(<MemoryRouter>
-          {' '}
-          <Address />
-          {' '}
-                                </MemoryRouter>);
+        const addrComp = render(
+          <MemoryRouter>
+            <Address />
+          </MemoryRouter>
+        );
         const addBtn = await addrComp.findByRole('button', { name: /add address/i });
 
         act(() => {

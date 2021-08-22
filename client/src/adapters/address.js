@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const _getAddress = async () => {
   try {
     const res = await fetch(`${process.env.REACT_APP_URL}:${process.env.REACT_APP_PORT}/address/`, {
