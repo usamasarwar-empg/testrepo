@@ -28,6 +28,34 @@ executors:
           POSTGRES_DB: phantom_test
 
 jobs:
+  frontend_lint:
+    executor: frontend
+    steps:
+      - checkout
+      - run: 
+          name: Install npm packages
+          command: |
+            cd ~/project/client
+            npm i
+      - run:
+          name: Run ESlint (Frontend)
+          command: |
+            cd ~/project/client
+            npm run lint
+  backend_lint:
+    executor: backend
+    steps:
+      - checkout
+      - run: 
+          name: Install npm packages
+          command: |
+            cd ~/project/server
+            npm i
+      - run:
+          name: Run ESlint (Backend)
+          command: |
+            cd ~/project/server
+            npm run lint
   frontend_tests:
     executor: frontend
     steps:
@@ -42,11 +70,6 @@ jobs:
           command: |
             cd ~/project/client
             npm run test
-      - run:
-          name: Run linter
-          command: |
-            cd ~/project/client
-            npm run lint
   backend_tests:
     executor: backend
     steps:
@@ -61,15 +84,12 @@ jobs:
           command: |
             cd ~/project/server
             npm run test
-      - run:
-          name: Run linter
-          command: |
-            cd ~/project/server
-            npm run lint
 
 workflows: 
   version: 2.1
   build: 
     jobs: 
+      - frontend_lint
+      - backend_lint
       - frontend_tests
       - backend_tests
