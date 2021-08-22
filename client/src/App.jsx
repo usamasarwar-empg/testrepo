@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-
 import 'react-toastify/dist/ReactToastify.css';
 import {
   BrowserRouter as Router,
@@ -22,8 +21,6 @@ import Address from './components/address/Address';
 
 // adapters
 import getProfile from './adapters/profile';
-
-
 
 toast.configure();
 
@@ -52,17 +49,15 @@ function App() {
     checkAuthenticated();
   }, []);
 
-
   const getUserProfile = async () => {
-    let name = await getProfile();
+    const name = await getProfile();
     setFirstName(name.firstname);
     setLastName(name.lastname);
-  }
+  };
 
   // Get User Profile
   useEffect(() => {
-    if (isAuthenticated)
-      getUserProfile();
+    if (isAuthenticated) getUserProfile();
   }, [isAuthenticated]);
 
   const setAuth = (boolean) => {
@@ -85,7 +80,6 @@ function App() {
                 <Redirect to="/dashboard" />
               ))}
             />
-
 
             <Route
               exact
@@ -110,15 +104,14 @@ function App() {
               exact
               path="/address"
               render={(props) => {
-                console.log("isAuth", isAuthenticated);
+                console.log('isAuth', isAuthenticated);
                 return (isAuthenticated ? (
                   <Address {...props} setAuth={setAuth} firstname={firstname} lastname={lastname} />
                 ) : (
                   <Redirect to="/login" />
-                ))
+                ));
               }}
-            >
-            </Route>
+            />
 
             <Route
               exact
@@ -129,7 +122,7 @@ function App() {
                   <Dashboard {...props} setAuth={setAuth} firstname={firstname} lastname={lastname} />
                 ) : (
                   <Redirect to="/login" />
-                ))
+                ));
               }}
             />
 

@@ -1,105 +1,100 @@
-import React from 'react'
-import { rest } from 'msw'
-import { setupServer } from 'msw/node'
-import "mutationobserver-shim"
-import 'whatwg-fetch'
-import { render, fireEvent, waitFor, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
-import { MemoryRouter } from 'react-router-dom'
+import React from 'react';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+import 'mutationobserver-shim';
+import 'whatwg-fetch';
+import {
+  render, fireEvent, waitFor, screen
+} from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+import { MemoryRouter } from 'react-router-dom';
 
-import Login from '../Login'
+import Login from '../Login';
 
 const server = setupServer(
-    rest.post(`${process.env.REACT_APP_URL}:${process.env.REACT_APP_PORT}/authentication/login`
-        , (req, res, ctx) => {
-            return res(ctx.json({ jwtToken: 'testToken' }))
-
-        })
-)
+  rest.post(`${process.env.REACT_APP_URL}:${process.env.REACT_APP_PORT}/authentication/login`,
+    (req, res, ctx) => res(ctx.json({ jwtToken: 'testToken' })))
+);
 
 const setAuth = jest.fn();
 
 describe('Login Component tests', () => {
+  beforeAll(() => server.listen());
+  afterEach(() => server.resetHandlers());
+  afterAll(() => server.close());
 
-    beforeAll(() => server.listen())
-    afterEach(() => server.resetHandlers())
-    afterAll(() => server.close())
+  test('Email password fields should be there', async () => {
+    const loginComp = render(
+      <MemoryRouter><Login setAuth={setAuth} /></MemoryRouter>
+    );
 
+    expect(loginComp.getByRole('heading').textContent).toBe('Login');
+    expect(loginComp.getByRole('button')).toBeInTheDocument();
+    expect(screen.getByRole('button')).toHaveTextContent('Submit');
+    expect(screen.getByRole('link')).toHaveTextContent('register');
+    expect(loginComp.getByPlaceholderText('Email')).toBeInTheDocument();
+    expect(loginComp.getByPlaceholderText('Password')).toBeInTheDocument();
+  });
 
+  test('Should change email value', async () => {
+    const loginComp = render(<MemoryRouter><Login setAuth={setAuth} /></MemoryRouter>);
+    const emailElem = loginComp.getByPlaceholderText('Email');
+    expect(emailElem.value).toBe('');
 
+    fireEvent.change(emailElem, {
+      target: {
+        value: 'testuser@email.com'
+      }
+    });
 
-    test('Email password fields should be there', async () => {
-        const loginComp = render(
-            <MemoryRouter><Login setAuth={setAuth} /></MemoryRouter>
-        )
+    expect(emailElem.value).toBe('testuser@email.com');
+  });
 
-        expect(loginComp.getByRole('heading').textContent).toBe('Login');
-        expect(loginComp.getByRole('button')).toBeInTheDocument();
-        expect(screen.getByRole('button')).toHaveTextContent('Submit');
-        expect(screen.getByRole('link')).toHaveTextContent('register');
-        expect(loginComp.getByPlaceholderText('Email')).toBeInTheDocument();
-        expect(loginComp.getByPlaceholderText('Password')).toBeInTheDocument();
-    })
+  test('Should change password value', async () => {
+    const loginComp = render(<MemoryRouter><Login setAuth={setAuth} /></MemoryRouter>);
+    const passElem = loginComp.getByPlaceholderText('Password');
+    expect(passElem.value).toBe('');
 
-    test('Should change email value', async () => {
-        const loginComp = render(<MemoryRouter><Login setAuth={setAuth} /></MemoryRouter>);
-        const emailElem = loginComp.getByPlaceholderText('Email');
-        expect(emailElem.value).toBe('');
+    fireEvent.change(passElem, {
+      target: {
+        value: 'testpassword'
+      }
+    });
 
-        fireEvent.change(emailElem, {
-            target: {
-                value: 'testuser@email.com'
-            }
-        })
+    expect(passElem.value).toBe('testpassword');
+  });
 
-        expect(emailElem.value).toBe('testuser@email.com');
-    })
+  test('Login should be successful if token recieved', async () => {
+    const { getByRole } = render(<MemoryRouter>
+      {' '}
+      <Login setAuth={setAuth} />
+      {' '}
+                                 </MemoryRouter>);
+    const btnElem = getByRole('button', { name: /submit/i });
+    fireEvent.click(btnElem);
 
-    test('Should change password value', async () => {
-        const loginComp = render(<MemoryRouter><Login setAuth={setAuth} /></MemoryRouter>);
-        const passElem = loginComp.getByPlaceholderText('Password');
-        expect(passElem.value).toBe('');
+    await waitFor(() => {
+      expect(setAuth).toHaveBeenCalledWith(true);
+    });
+  });
 
-        fireEvent.change(passElem, {
-            target: {
-                value: 'testpassword'
-            }
-        })
+  test('Login should not be successful if token recieved is null', async () => {
+    server.use(
+      rest.post(`${process.env.REACT_APP_URL}:${process.env.REACT_APP_PORT}/authentication/login`,
+        (req, res, ctx) => res(ctx.json({ jwtToken: null })))
+    );
 
-        expect(passElem.value).toBe('testpassword');
-    })
+    const { getByRole } = render(<MemoryRouter>
+      {' '}
+      <Login setAuth={setAuth} />
+      {' '}
+                                 </MemoryRouter>);
+    const btnElem = getByRole('button', { name: /submit/i });
 
+    fireEvent.click(btnElem);
 
-    test('Login should be successful if token recieved', async () => {
-        const { getByRole } = render(<MemoryRouter> <Login setAuth={setAuth} /> </MemoryRouter>);
-        const btnElem = getByRole('button', { name: /submit/i });
-        fireEvent.click(btnElem);
-
-        await waitFor(() => {
-            expect(setAuth).toHaveBeenCalledWith(true);
-
-        })
-    })
-
-    test('Login should not be successful if token recieved is null', async () => {
-
-        server.use(
-            rest.post(`${process.env.REACT_APP_URL}:${process.env.REACT_APP_PORT}/authentication/login`
-                , (req, res, ctx) => {
-                    return res(ctx.json({ jwtToken: null }))
-                })
-        );
-
-        const { getByRole } = render(<MemoryRouter> <Login setAuth={setAuth} /> </MemoryRouter>);
-        const btnElem = getByRole('button', { name: /submit/i });
-
-        fireEvent.click(btnElem);
-
-        await waitFor(() => {
-            expect(setAuth).toHaveBeenCalledWith(false);
-
-        })
-
-    })
-
-})
+    await waitFor(() => {
+      expect(setAuth).toHaveBeenCalledWith(false);
+    });
+  });
+});
