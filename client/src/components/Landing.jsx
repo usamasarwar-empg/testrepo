@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 const Landing = () => (
   <div className="jumbotron mt-5">
-    <h1 className='text-center'>Welcome to Phantom POC</h1>
-    <div className='text-center'>
+    <h1 className="text-center">Welcome to Phantom POC</h1>
+    <div className="text-center">
       <Link to="/login" className="btn btn-primary">
         Login
       </Link>
