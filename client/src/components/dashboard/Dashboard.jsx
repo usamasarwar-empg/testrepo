@@ -3,10 +3,8 @@ import { toast } from 'react-toastify';
 
 // components
 
-
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState('');
-
 
   const getProfile = async () => {
     try {
@@ -37,20 +35,20 @@ const Dashboard = ({ setAuth }) => {
 
   useEffect(() => {
     getProfile();
-
   });
 
   return (
     <div>
       <div className="d-flex mt-5 justify-content-around">
         <h2>
-          {name} User Logged in!
+          {name}
+          {' '}
+          User Logged in!
         </h2>
         <button onClick={(e) => logout(e)} className="btn btn-primary" type="button">
           Logout
         </button>
       </div>
-
 
     </div>
   );
