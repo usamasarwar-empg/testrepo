@@ -1,6 +1,8 @@
 // eslint-disable-next-line func-names
 module.exports = function (req, res, next) {
-  const { email, name, password } = req.body;
+  const {
+    email, firstname, lastname, password
+  } = req.body;
 
   // check a valid email has been entered by using a regex function
   function validEmail(userEmail) {
@@ -9,19 +11,19 @@ module.exports = function (req, res, next) {
 
   if (req.path === '/register') {
     if (!email) {
-      return res.json('Missing Parameters');
+      return res.status(401).json('Missing Parameters');
     }
     // console.log(!email.length);
-    if (![email, name, password].every(Boolean)) {
-      return res.json('Missing Credentials');
+    if (![email, firstname, lastname, password].every(Boolean)) {
+      return res.status(401).json('Missing Credentials');
     } if (!validEmail(email)) {
-      return res.json('Invalid Email');
+      return res.status(401).json('Invalid Email');
     }
   } else if (req.path === '/login') {
     if (![email, password].every(Boolean)) {
-      return res.json('Missing Credentials');
+      return res.status(401).json('Missing Credentials');
     } if (!validEmail(email)) {
-      return res.json('Invalid Email');
+      return res.status(401).json('Invalid Email');
     }
   }
 

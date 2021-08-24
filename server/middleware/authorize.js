@@ -3,7 +3,7 @@ require('dotenv').config();
 
 // middleware will continue if the token is inside the local storage
 // eslint-disable-next-line func-names
-module.exports = function (req, res, next) {
+module.exports = async (req, res, next) => {
   // Get token from header
   const token = req.header('jwt_token');
 
@@ -17,6 +17,7 @@ module.exports = function (req, res, next) {
     // it is going to give the user id (user:{id: user.id})
     const verify = jwt.verify(token, process.env.jwtSecret);
 
+    console.log(process.env.jwtSecret);
     req.user = verify.user;
 
     // console.log(token);

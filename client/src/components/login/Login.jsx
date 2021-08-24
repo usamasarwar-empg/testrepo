@@ -18,7 +18,7 @@ const Login = ({ setAuth }) => {
     try {
       const body = { email, password };
       const response = await fetch(
-        'http://localhost:5000/authentication/login',
+        `${process.env.REACT_APP_URL}:${process.env.REACT_APP_PORT}/authentication/login`,
         {
           method: 'POST',
           headers: {
@@ -29,7 +29,6 @@ const Login = ({ setAuth }) => {
       );
 
       const parseRes = await response.json();
-
       if (parseRes.jwtToken) {
         localStorage.setItem('token', parseRes.jwtToken);
         setAuth(true);
@@ -50,6 +49,7 @@ const Login = ({ setAuth }) => {
         <input
           type="text"
           name="email"
+          placeholder="Email"
           value={email}
           onChange={(e) => onChange(e)}
           className="form-control my-3"
@@ -57,6 +57,7 @@ const Login = ({ setAuth }) => {
         <input
           type="password"
           name="password"
+          placeholder="Password"
           value={password}
           onChange={(e) => onChange(e)}
           className="form-control my-3"

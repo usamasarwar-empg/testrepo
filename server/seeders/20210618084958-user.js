@@ -3,7 +3,8 @@ const bcrypt = require('bcrypt');
 
 const users = [...Array(1)].map(() => (
   {
-    name: faker.name.findName(),
+    firstname: faker.name.firstName(),
+    lastname: faker.name.lastName(),
     email: faker.internet.email(),
     password: bcrypt.hashSync('password', 10),
     createdAt: new Date(),

@@ -6,19 +6,24 @@ const Register = ({ setAuth }) => {
   const [inputs, setInputs] = useState({
     email: '',
     password: '',
-    name: '',
+    firstname: '',
+    lastname: ''
   });
 
-  const { email, password, name } = inputs;
+  const {
+    email, password, firstname, lastname
+  } = inputs;
 
   const onChange = (e) => setInputs({ ...inputs, [e.target.name]: e.target.value });
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const body = { email, password, name };
+      const body = {
+        email, password, firstname, lastname
+      };
       const response = await fetch(
-        'http://localhost:5000/authentication/register',
+        `${process.env.REACT_APP_URL}:${process.env.REACT_APP_PORT}/authentication/register`,
         {
           method: 'POST',
           headers: {
@@ -35,8 +40,6 @@ const Register = ({ setAuth }) => {
         toast.success('Registered Successfully');
       } else if (parseRes.message) {
         setAuth(false);
-        // console.log(parseRes);
-        // console.log(parseRes.message);
         toast.error(`Error: ${parseRes.message}`);
       } else {
         setAuth(false);
@@ -69,9 +72,17 @@ const Register = ({ setAuth }) => {
         />
         <input
           type="text"
-          name="name"
-          value={name}
-          placeholder="name"
+          name="firstname"
+          value={firstname}
+          placeholder="First name"
+          onChange={(e) => onChange(e)}
+          className="form-control my-3"
+        />
+        <input
+          type="text"
+          name="lastname"
+          value={lastname}
+          placeholder="Last name"
           onChange={(e) => onChange(e)}
           className="form-control my-3"
         />

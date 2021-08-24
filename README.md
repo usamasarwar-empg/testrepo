@@ -33,6 +33,7 @@
 * Install dependencies: `npm install`
 * Linting with ESLint: `npm run lint`
 * Attempt to fix lint errors: `npm run lint:fix`
+* Reset DB before running tests: `npm run pretest`
 * Unit tests with Jest: `npm run test`
 * Start node server: `npm run start`
 * Sequelize commands: `npx sequelize-cli ...` e.g. `db:migrate:status`, `db:migrate`, `db:migrate:undo`, `db:seed`

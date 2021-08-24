@@ -7,7 +7,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      firstname: {
+        type: Sequelize.STRING
+      },
+      lastname: {
         type: Sequelize.STRING
       },
       email: {
@@ -27,6 +30,7 @@ module.exports = {
     });
   },
   down: async (queryInterface) => {
+    // await queryInterface.removeColumn('addresses', 'user_id');
     await queryInterface.dropTable('users');
   }
 };

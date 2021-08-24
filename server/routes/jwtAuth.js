@@ -12,7 +12,9 @@ const authorize = require('../middleware/authorize');
 
 // authorization
 router.post('/register', validInfo, async (req, res) => {
-  const { email, name, password } = req.body;
+  const {
+    email, firstname, lastname, password
+  } = req.body;
 
   try {
     const salt = await bcrypt.genSalt(10);
@@ -20,7 +22,8 @@ router.post('/register', validInfo, async (req, res) => {
 
     const [response, created] = await user.findOrCreate({
       defaults: {
-        name,
+        firstname,
+        lastname,
         password: bcryptPassword,
       },
       where: {
