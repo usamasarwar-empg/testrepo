@@ -45,20 +45,19 @@ describe('Run autheintication tests', () => {
 
   describe('Login user', () => {
     it('should login a user and return status 200', async () => {
-      const response = await request(app).post('/authentication/login')
+      await request(app).post('/authentication/login')
         .send({
-          email: 'usertest@email.com',
-          password: 'usertest'
-        });
-      await expect(response.headers['content-type']).toEqual(expect.stringContaining('json'));
-      // await expect(response.body.jwtToken).toBeDefined();
-      await expect(response.statusCode).toBe(200);
+          email: 'phantom_testuser@email.com',
+          password: 'phantom'
+        })
+        .expect('Content-Type', /json/)
+        .expect(200);
     });
 
     it('should NOT login a user with invalid credentials', async () => {
       await request(app).post('/authentication/login')
         .send({
-          email: 'usertest@email.com',
+          email: 'phantom_testuser@email.com',
           password: 'wrongPass'
         })
         .expect('Content-Type', /json/)
@@ -67,7 +66,7 @@ describe('Run autheintication tests', () => {
       await request(app).post('/authentication/login')
         .send({
           email: 'wrongEmail@email.com',
-          password: 'usertest'
+          password: 'phantom'
         })
         .expect('Content-Type', /json/)
         .expect(401);

@@ -18,6 +18,10 @@
     "react-scripts": "^4.0.3",
     "react-toastify": "^6.0.8"
   },
+  "engines": {
+    "npm": "7.5.2",
+    "node": "12.21.0"
+  },
   "scripts": {
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "lint:fix": "eslint 'src/**/*.{js,jsx}' --fix",

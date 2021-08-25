@@ -1,0 +1,36 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.191.1/containers/ruby-rails-postgres
+{
+	"name": "OLX Phantom",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/phantom",
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"esbenp.prettier-vscode", // pretty code formatting
+		"aaron-bond.better-comments", // Highlights TODO, FIXME, etc.
+		"mikestead.dotenv", // .env config support
+		"dbaeumer.vscode-eslint", // ESLint integration
+		"knisterpeter.vscode-github", // GitHub integration
+		"donjayamanne.githistory", // Shows who and when committed specific pieces of code
+		"mtxr.sqltools", // Visual SQL tool
+		"mtxr.sqltools-driver-pg", // Driver for PgSQL for above tool
+		// "eridem.vscode-postman", // To execute newman tests to check if all APIs are functioning correctly
+		"coenraads.bracket-pair-colorizer-2", // bracket pair highlights
+		"bpruitt-goddard.mermaid-markdown-syntax-highlighting", // Mermaid syntax support
+		"hbenl.vscode-test-explorer", // Test explorer for Jest and RSpec
+		"kavod-io.vscode-jest-test-adapter", // Jest support for the test explorer
+		"ms-vsliveshare.vsliveshare-pack" // For teams having team members working remotely
+	],
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [5000, 3000, 5432],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+    // bundle config --delete without ; bundle config --delete with ; 
+	// "postCreateCommand": "",
+
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	// "remoteUser": "vscode"
+}
