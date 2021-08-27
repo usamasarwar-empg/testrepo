@@ -52,6 +52,28 @@ const state1 = {
   longitude: 75.3412179
 };
 
+const orderDetailsTest = {
+  order_id: '123test',
+  lineitem_id: '123test',
+  order_deliver_date: new Date(),
+  IMEI_1: 'imei123test',
+  IMEI_2: 'imei123test',
+  serial_number: 111,
+  order_date: new Date(),
+  createdAt: new Date(),
+  updatedAt: new Date()
+};
+
+const orderDetails1 = {
+  order_id: '1',
+  lineitem_id: '2',
+  order_deliver_date: new Date(),
+  IMEI_1: 'random_imei_1',
+  IMEI_2: 'random_imei_1',
+  serial_number: 777,
+  order_date: new Date(),
+};
+
 module.exports = {
-  user1, user2, user2Address, country1, state1
+  user1, user2, user2Address, country1, state1, orderDetailsTest, orderDetails1
 };
