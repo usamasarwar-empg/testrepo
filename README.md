@@ -141,3 +141,52 @@ router.post('/todos', authorize, async (req, res) => {
 * [React documentation](https://reactjs.org/docs/getting-started.html)
 * [Enable Emmet support for JSX in Visual Studio Code | React](https://medium.com/@eshwaren/enable-emmet-support-for-jsx-in-visual-studio-code-react-f1f5dfe8809c)
 * [js-beautify for VS Code](https://marketplace.visualstudio.com/items?itemName=HookyQR.beautify)
+
+## VSCode Remote Development
+
+The repository now includes .devcontainer and files to allow developers to work in a Dockerized container which
+is generated from the same Dockerfile as production, so the development environment stays as close as possible to 
+production while the developers need to install minimal software on their system.
+
+### Requirements
+
+- Visual Studio Code by Microsoft https://code.visualstudio.com/
+- Remote Development Extension Pack https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack
+- Mac / Windows Docker Desktop https://www.docker.com/products/docker-desktop
+- Linux Docker Engine https://hub.docker.com/search?offering=community&operating_system=linux&q=&type=edition
+
+### First Time Setup
+
+For some reason the DB init script is not working properly in this environment. Hence, need to initialize PostgreSQL Databases manually.
+
+```
+Install PostgreSQL Client
+$ apt-get update
+$ apt-get install postgresql-client
+$ psql -h localhost -U postgresql
+
+postgres=# CREATE DATABASE phantom_development;
+postgres=# GRANT ALL PRIVILEGES ON DATABASE phantom_development TO postgres;
+
+postgres=# CREATE DATABASE phantom_test;
+postgres=# GRANT ALL PRIVILEGES ON DATABASE phantom_test TO postgres;
+```
+
+### Included Extensions
+
+	"extensions": [
+		"esbenp.prettier-vscode", // pretty code formatting
+		"aaron-bond.better-comments", // Highlights TODO, FIXME, etc.
+		"mikestead.dotenv", // .env config support
+		"dbaeumer.vscode-eslint", // ESLint integration
+		"knisterpeter.vscode-github", // GitHub integration
+		"donjayamanne.githistory", // Shows who and when committed specific pieces of code
+		"mtxr.sqltools", // Visual SQL tool
+		"mtxr.sqltools-driver-pg", // Driver for PgSQL for above tool
+		// "eridem.vscode-postman", // To execute newman tests to check if all APIs are functioning correctly
+		"coenraads.bracket-pair-colorizer-2", // bracket pair highlights
+		"bpruitt-goddard.mermaid-markdown-syntax-highlighting", // Mermaid syntax support
+		"hbenl.vscode-test-explorer", // Test explorer for Jest and RSpec
+		"kavod-io.vscode-jest-test-adapter", // Jest support for the test explorer
+		"ms-vsliveshare.vsliveshare-pack" // For teams having team members working remotely
+	],
