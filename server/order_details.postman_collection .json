@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "750fedf1-edad-4399-965d-eb6cb269756e",
+		"name": "Order Details",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get order details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "jwt_token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo1fSwiaWF0IjoxNjMwMzMzMDI5LCJleHAiOjE2MzAzMzY2Mjl9._8FXYMBmYebA5UTh8kj55IZNu2LiOyHmFclPuU76-lI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"test@email.com\" ,\n    \"firstname\": \"test\",\n    \"lastname\": \"user\",\n    \"password\": \"test\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/orderdetails",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orderdetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add order details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "jwt_token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo1fSwiaWF0IjoxNjMwMzMzMDI5LCJleHAiOjE2MzAzMzY2Mjl9._8FXYMBmYebA5UTh8kj55IZNu2LiOyHmFclPuU76-lI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"order_id\": 222,\n        \"lineitem_id\": 222,\n        \"order_deliver_date\": \"2021-08-30T11:40:15.594Z\",\n        \"IMEI_1\": \"imei222\",\n        \"IMEI_2\": \"imei222\",\n        \"serial_number\": \"sn222\",\n        \"order_date\": \"2021-08-30T11:40:15.594Z\",\n        \"createdAt\": \"2021-08-30T11:40:15.594Z\",\n        \"updatedAt\": \"2021-08-30T11:40:15.594Z\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/orderdetails",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orderdetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update order details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "jwt_token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo1fSwiaWF0IjoxNjMwMzMzMDI5LCJleHAiOjE2MzAzMzY2Mjl9._8FXYMBmYebA5UTh8kj55IZNu2LiOyHmFclPuU76-lI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"order_id\": 222,\n        \"lineitem_id\": 222,\n        \"order_deliver_date\": \"2021-08-30T11:40:15.594Z\",\n        \"IMEI_1\": \"imei1_updated\",\n        \"IMEI_2\": \"imei2_updated\",\n        \"serial_number\": \"sn222\",\n        \"order_date\": \"2021-08-30T11:40:15.594Z\",\n        \"createdAt\": \"2021-08-30T11:40:15.594Z\",\n        \"updatedAt\": \"2021-08-30T11:40:15.594Z\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/orderdetails/222",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orderdetails",
+						"222"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete order details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "jwt_token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo1fSwiaWF0IjoxNjMwMzMzMDI5LCJleHAiOjE2MzAzMzY2Mjl9._8FXYMBmYebA5UTh8kj55IZNu2LiOyHmFclPuU76-lI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/orderdetails/222",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orderdetails",
+						"222"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
