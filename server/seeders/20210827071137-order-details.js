@@ -1,11 +1,11 @@
 const orderDetails = [
   {
-    order_id: '123',
-    lineitem_id: '123',
+    order_id: 111,
+    lineitem_id: 111,
     order_deliver_date: new Date(),
     IMEI_1: 'imei123',
     IMEI_2: 'imei123',
-    serial_number: 111,
+    serial_number: 'sn111',
     order_date: new Date(),
     createdAt: new Date(),
     updatedAt: new Date()

@@ -61,8 +61,8 @@ describe('Run Order Details tests', () => {
         { where: { order_id: orderDetailsTest.order_id } });
     });
 
-    // update orderDetails (having order_id:'123test') values
-    it('should update IMEI of orderDetails having order_id: 123test', async () => {
+    // update orderDetails (having order_id:123) values
+    it('should update IMEI of orderDetails having order_id: 123', async () => {
       const updatedOrderDetails = { ...orderDetailsTest };
       updatedOrderDetails.IMEI_1 = 'imei1_updated';
       console.log('UPDATED ORDER DETAILS');
@@ -88,7 +88,7 @@ describe('Run Order Details tests', () => {
 
     // if orderDetails not found
     it('should return status 400 if not updated', async () => {
-      const response = await request(app).put('/orderdetails/random_order_id02342341')
+      const response = await request(app).put('/orderdetails/42341')
         .set('jwt_token', jwtTokenUser1)
         .set('Content-Type', 'application/json')
         .send(orderDetails1);
@@ -100,7 +100,7 @@ describe('Run Order Details tests', () => {
   // DELETE orderDetails
   describe('DELETE orderDetails', () => {
     // delete orderDetails
-    it('should delete orderDetails with order_id: 123test', async () => {
+    it('should delete orderDetails with order_id: 123', async () => {
       const response = await request(app).del(`/orderdetails/${orderDetailsTest.order_id}`)
         .set('jwt_token', jwtTokenUser1)
         .set('Content-Type', 'application/json');
@@ -110,7 +110,7 @@ describe('Run Order Details tests', () => {
 
     // if orderDetails not found
     it('should return 400 status if orderDetails not found', async () => {
-      const response = await request(app).del('/orderdetails/random_order_id0020213')
+      const response = await request(app).del('/orderdetails/20213')
         .set('jwt_token', jwtTokenUser1)
         .set('Content-Type', 'application/json');
       expect(response.body).toBe(0);

@@ -53,24 +53,24 @@ const state1 = {
 };
 
 const orderDetailsTest = {
-  order_id: '123test',
-  lineitem_id: '123test',
+  order_id: 123,
+  lineitem_id: 123,
   order_deliver_date: new Date(),
   IMEI_1: 'imei123test',
   IMEI_2: 'imei123test',
-  serial_number: 111,
+  serial_number: 'sn111',
   order_date: new Date(),
   createdAt: new Date(),
   updatedAt: new Date()
 };
 
 const orderDetails1 = {
-  order_id: '1',
-  lineitem_id: '2',
+  order_id: 1,
+  lineitem_id: 2,
   order_deliver_date: new Date(),
   IMEI_1: 'random_imei_1',
   IMEI_2: 'random_imei_1',
-  serial_number: 777,
+  serial_number: 'sn777',
   order_date: new Date(),
 };
 

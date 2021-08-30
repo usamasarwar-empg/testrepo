@@ -9,25 +9,25 @@ module.exports = {
       },
       order_id: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       lineitem_id: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       order_deliver_date: {
         allowNull: false,
         type: Sequelize.DATE
       },
       IMEI_1: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(15)
       },
       IMEI_2: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(15)
       },
       serial_number: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       order_date: {
         allowNull: false,
