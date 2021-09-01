@@ -6,12 +6,55 @@
 	},
 	"item": [
 		{
+			"name": "login user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();",
+							"pm.globals.set(\"jwt_token\", data.jwtToken);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"phantom_admin@email.com\",\n    \"password\": \"phantom\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/authentication/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"authentication",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "get order details",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
+							"console.log('get test');",
+							"console.log('{{jwt_token}}');",
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});"
@@ -31,7 +74,7 @@
 				"header": [
 					{
 						"key": "jwt_token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo1fSwiaWF0IjoxNjMwMzMzMDI5LCJleHAiOjE2MzAzMzY2Mjl9._8FXYMBmYebA5UTh8kj55IZNu2LiOyHmFclPuU76-lI",
+						"value": "{{jwt_token}}",
 						"type": "text"
 					}
 				],
@@ -78,7 +121,7 @@
 				"header": [
 					{
 						"key": "jwt_token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo1fSwiaWF0IjoxNjMwMzMzMDI5LCJleHAiOjE2MzAzMzY2Mjl9._8FXYMBmYebA5UTh8kj55IZNu2LiOyHmFclPuU76-lI",
+						"value": "{{jwt_token}}",
 						"type": "text"
 					}
 				],
@@ -125,7 +168,7 @@
 				"header": [
 					{
 						"key": "jwt_token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo1fSwiaWF0IjoxNjMwMzMzMDI5LCJleHAiOjE2MzAzMzY2Mjl9._8FXYMBmYebA5UTh8kj55IZNu2LiOyHmFclPuU76-lI",
+						"value": "{{jwt_token}}",
 						"type": "text"
 					}
 				],
@@ -173,7 +216,7 @@
 				"header": [
 					{
 						"key": "jwt_token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo1fSwiaWF0IjoxNjMwMzMzMDI5LCJleHAiOjE2MzAzMzY2Mjl9._8FXYMBmYebA5UTh8kj55IZNu2LiOyHmFclPuU76-lI",
+						"value": "{{jwt_token}}",
 						"type": "text"
 					}
 				],
