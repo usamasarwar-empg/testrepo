@@ -10,14 +10,18 @@ const Register = ({ setAuth }) => {
     lastname: ''
   });
 
-  const { email, password, firstname, lastname } = inputs;
+  const {
+    email, password, firstname, lastname
+  } = inputs;
 
   const onChange = (e) => setInputs({ ...inputs, [e.target.name]: e.target.value });
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const body = { email, password, firstname, lastname };
+      const body = {
+        email, password, firstname, lastname
+      };
       const response = await fetch(
         `${process.env.REACT_APP_URL}:${process.env.REACT_APP_PORT}/authentication/register`,
         {
@@ -36,8 +40,6 @@ const Register = ({ setAuth }) => {
         toast.success('Registered Successfully');
       } else if (parseRes.message) {
         setAuth(false);
-        // console.log(parseRes);
-        // console.log(parseRes.message);
         toast.error(`Error: ${parseRes.message}`);
       } else {
         setAuth(false);
