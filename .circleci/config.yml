@@ -27,32 +27,29 @@ executors:
           POSTGRES_PASSWORD: password
           POSTGRES_DB: phantom_test
 
-
 commands: 
   server-packages:
     steps:
       - run:
-          name: Install npm server packages
+          name: Install yarn server packages
           command: |
             cd ~/project/server
-            npm i
+            yarn install
   client-packages:
     steps:
       - run: 
-          name: Install npm client packages
+          name: Install yarn client packages
           command: |
             cd ~/project/client
-            npm i
-
+            yarn install
   pretest-migrations_seeds:
     steps:
       - run:
           name: Run pretest migrations and seeds
           command: |
             cd ~/project/server
-            npm run pretest
+            yarn run pretest
     
-
 jobs:
   frontend_lint:
     executor: frontend
@@ -63,7 +60,7 @@ jobs:
           name: Run ESlint (Frontend)
           command: |
             cd ~/project/client
-            npm run lint
+            yarn run lint
   backend_lint:
     executor: backend
     steps:
@@ -73,7 +70,7 @@ jobs:
           name: Run ESlint (Backend)
           command: |
             cd ~/project/server
-            npm run lint
+            yarn run lint
   frontend_tests:
     executor: frontend
     steps:
@@ -83,7 +80,7 @@ jobs:
           name: Run tests
           command: |
             cd ~/project/client
-            npm run test
+            yarn test
   backend_tests:
     executor: backend
     steps:
@@ -93,7 +90,7 @@ jobs:
           name: Run tests
           command: |
             cd ~/project/server
-            npm run test
+            yarn test
   
   newman-collection-run:
     executor: backend
@@ -105,10 +102,9 @@ jobs:
           name: Run newman collection
           command: |
             cd ~/project/server
-            sudo npm install -g newman
-            (NODE_ENV=test npm run start&)
+            sudo yarn install -g newman
+            (NODE_ENV=test yarn start&)
             NODE_ENV=test newman run postman/order_details.postman_collection\ .json 
-
 
 workflows: 
   version: 2.1
