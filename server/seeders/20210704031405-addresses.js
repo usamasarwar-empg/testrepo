@@ -1,5 +1,3 @@
-// const faker = require('faker');
-
 // const address = [...Array(10)].map(() => (
 //   {
 //     user_id: 1,
@@ -24,6 +22,7 @@
 //     floor: 'floor'
 //   }
 // ));
+
 module.exports = {
   up: async () => {
     /**

@@ -8,12 +8,13 @@ import { MemoryRouter, Route } from 'react-router-dom';
 import Navbar from '../Navbar';
 
 describe('NavBar Component tests', () => {
-  test('should have Home, Address, Dashboard, Logout links', async () => {
+  test('should have Home, Address, Dashboard, Order-Details, Logout links', async () => {
     const navBarComp = render(<MemoryRouter><Navbar /></MemoryRouter>);
     expect(navBarComp.getByText(/home/i)).toBeInTheDocument();
     expect(navBarComp.getByText(/address/i)).toBeInTheDocument();
     expect(navBarComp.getByText(/dashboard/i)).toBeInTheDocument();
     expect(navBarComp.getByText(/logout/i)).toBeInTheDocument();
+    expect(navBarComp.getByText(/order-details/i)).toBeInTheDocument();
   });
 
   test('clicking Address should redirect to Address page', async () => {
@@ -30,6 +31,22 @@ describe('NavBar Component tests', () => {
     });
 
     expect(container).toHaveTextContent('AddressTestComp');
+  });
+
+  test('clicking Order-Details should redirect to order details page', async () => {
+    const { container, getByText } = render(
+      <MemoryRouter>
+        <Navbar />
+        <Route path="/orderdetails">OrderDetailsTestComp</Route>
+      </MemoryRouter>
+    );
+
+    await act(async () => {
+      const orderDetailsLink = getByText(/order-details/i);
+      fireEvent.click(orderDetailsLink);
+    });
+
+    expect(container).toHaveTextContent('OrderDetailsTestComp');
   });
 
   test('clicking Dashboard or Home should redirect to Dashboard page', async () => {

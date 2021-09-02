@@ -15,5 +15,6 @@ module.exports = async () => {
 
   app.use('/address', require('./routes/address'));
   app.use('/csc', require('./routes/csc'));
+  app.use('/orderdetails', require('./routes/orderDetails'));
   return app;
 };

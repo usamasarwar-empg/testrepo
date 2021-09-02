@@ -1,0 +1,72 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./pg-init-scripts:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_USER=postgres
+      # - POSTGRES_DB=olx_unimog_development
+      - POSTGRES_MULTIPLE_DATABASES=phantom_development,phantom_test
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432"
+
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/phantom
+      - /phantom/node_modules
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+    # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
+    network_mode: service:db
+    depends_on:
+      - db
+  # server:
+  #   build:
+  #     context: ./server
+  #     dockerfile: Dockerfile
+  #   image: myapp-server
+  #   container_name: myapp-node-server
+  #   command: /usr/src/app/node_modules/.bin/nodemon server.js
+  #   volumes:
+  #     - ./server/:/usr/src/app
+  #     - /usr/src/app/node_modules
+  #   ports:
+  #     - "5000:5000"
+  #   depends_on:
+  #     - mongo
+  #   env_file: ./server/.env
+  #   environment:
+  #     - NODE_ENV=development
+  #   networks:
+  #     - app-network
+
+  # client:
+  #   build:
+  #     context: ./client
+  #     dockerfile: Dockerfile
+  #   image: myapp-client
+  #   container_name: myapp-react-client
+  #   command: npm start
+  #   volumes:
+  #     - ./client/:/usr/app
+  #     - /usr/app/node_modules
+  #   depends_on:
+  #     - server
+  #   ports:
+  #     - "3000:3000"
+  #   networks:
+  #     - app-network
+
+volumes:
+  postgres-data:
+  node_modules:
+  web-root:
+    driver: local
