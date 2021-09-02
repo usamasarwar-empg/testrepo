@@ -102,7 +102,7 @@ jobs:
           name: Run newman collection
           command: |
             cd ~/project/server
-            sudo yarn install -g newman
+            sudo yarn global add newman
             (NODE_ENV=test yarn start&)
             NODE_ENV=test newman run postman/order_details.postman_collection\ .json 
 
