@@ -58,11 +58,7 @@ jobs:
     executor: frontend
     steps:
       - checkout
-      - run: 
-          name: Install npm packages
-          command: |
-            cd ~/project/client
-            npm i
+      - client-packages
       - run:
           name: Run ESlint (Frontend)
           command: |
@@ -72,11 +68,7 @@ jobs:
     executor: backend
     steps:
       - checkout
-      - run: 
-          name: Install npm packages
-          command: |
-            cd ~/project/server
-            npm i
+      - server-packages
       - run:
           name: Run ESlint (Backend)
           command: |
@@ -86,11 +78,7 @@ jobs:
     executor: frontend
     steps:
       - checkout
-      - run: 
-          name: Install npm packages
-          command: |
-            cd ~/project/client
-            npm i
+      - client-packages
       - run:
           name: Run tests
           command: |
@@ -100,11 +88,7 @@ jobs:
     executor: backend
     steps:
       - checkout
-      - run: 
-          name: Install npm packages
-          command: |
-            cd ~/project/server
-            npm i
+      - server-packages
       - run:
           name: Run tests
           command: |
