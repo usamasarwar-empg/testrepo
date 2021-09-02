@@ -122,8 +122,8 @@ jobs:
           command: |
             cd ~/project/server
             sudo npm install -g newman
-            (npm run start&)
-            newman run postman/order_details.postman_collection\ .json 
+            (NODE_ENV=test npm run start&)
+            NODE_ENV=test newman run postman/order_details.postman_collection\ .json 
 
 
 workflows: 
