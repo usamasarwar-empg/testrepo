@@ -27,6 +27,23 @@ executors:
           POSTGRES_PASSWORD: password
           POSTGRES_DB: phantom_test
 
+
+commands: 
+  server-packages:
+    steps:
+      - run:
+          name: Install npm server packages
+          command: |
+            cd ~/project/server
+            npm i
+  client-packages:
+    steps:
+      - run: 
+          name: Install npm client packages
+          command: |
+            cd ~/project/client
+            npm i
+
 jobs:
   frontend_lint:
     executor: frontend
@@ -84,6 +101,20 @@ jobs:
           command: |
             cd ~/project/server
             npm run test
+  
+  newman-collection-run:
+    executor: backend
+    steps:
+      - checkout
+      - server-packages
+      - run:
+          name: Run newman collection
+          command: |
+            cd ~/project/server
+            sudo npm install -g newman
+            npm start
+            newman run postman/order_details.postman_collection\ .json 
+
 
 workflows: 
   version: 2.1
