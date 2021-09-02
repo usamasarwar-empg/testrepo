@@ -44,6 +44,15 @@ commands:
             cd ~/project/client
             npm i
 
+  pretest-migrations_seeds:
+    steps:
+      - run:
+          name: Run pretest migrations and seeds
+          command: |
+            cd ~/project/server
+            npm run pretest
+    
+
 jobs:
   frontend_lint:
     executor: frontend
@@ -107,6 +116,7 @@ jobs:
     steps:
       - checkout
       - server-packages
+      - pretest-migrations_seeds
       - run:
           name: Run newman collection
           command: |
