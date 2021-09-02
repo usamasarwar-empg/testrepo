@@ -9,7 +9,7 @@ executors:
           REACT_APP_PORT: 5000
   backend:
     docker:
-      - image: cimg/node:12.21.0
+      - image: cimg/node:14.17.6
         environment:
           database_test: phantom_test
           user_test: postgres
