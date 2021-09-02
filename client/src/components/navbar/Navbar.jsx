@@ -33,6 +33,9 @@ function Navbar({ setAuth }) {
               <li className="nav-item">
                 <Link to="/address" className="nav-link active"> Address </Link>
               </li>
+              <li className="nav-item">
+                <Link to="/orderdetails" className="nav-link active"> Order-Details </Link>
+              </li>
             </ul>
             <button className="btn btn-danger" type="button" onClick={(e) => logout(e)}>Logout</button>
           </div>

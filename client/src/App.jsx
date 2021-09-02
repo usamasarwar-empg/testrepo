@@ -18,6 +18,7 @@ import Register from './components/register/Register';
 import Dashboard from './components/dashboard/Dashboard';
 import Landing from './components/landing/Landing';
 import Address from './components/address/Address';
+import OrderDetails from './components/orderDetails/OrderDetails';
 
 // adapters
 import getProfile from './adapters/profile';
@@ -109,7 +110,18 @@ function App() {
                 ));
               }}
             />
-
+            <Route
+              exact
+              path="/orderdetails"
+              render={(props) => {
+                console.log('isAuth', isAuthenticated);
+                return (isAuthenticated ? (
+                  <OrderDetails {...props} setAuth={setAuth} />
+                ) : (
+                  <Redirect to="/login" />
+                ));
+              }}
+            />
             <Route
               exact
               path="/dashboard"
